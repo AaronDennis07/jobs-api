@@ -11,12 +11,13 @@ const connectDB = require('./db/connect');
 const authentication = require('./middleware/authentication');
 const User = require('./models/User');
 const Job = require('./models/Job');
-
+const YAML = require('yamljs')
+const swagger = require('swagger-ui-express')
 const helmet = require('helmet');
 const cors = require('cors');
 const xss = require('xss-clean');
 const rateLimiter = require('express-rate-limit');
-
+const swaggerDocs = YAML.load('./swagger.yaml')
 app.set('trust proxy', 1);
 app.use(
   rateLimiter({
@@ -36,7 +37,7 @@ app.use(xss());
 app.get('/', (req, res) => {
   res.send('jobs api');
 });
-
+app.use('/api-docs',swagger.serve,swagger.setup(swaggerDocs))
 app.get('/reset',async(req,res)=>{
   await User.deleteMany()
   await Job.deleteMany()
