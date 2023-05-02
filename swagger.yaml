@@ -1,7 +1,10 @@
 openapi: 3.0.0
 info:
   title: jobs-api
-  contact: {}
+  contact: {
+    name: Aaron Dennis,
+    email: aarondennis@gmail.com
+  }
   version: '1.0'
 servers:
   - url: https://jobs-api-24x4.onrender.com/api/v1/
@@ -254,8 +257,6 @@ components:
       scheme: bearer
 security: []
 tags:
-  - name: Misc
-    description: ''
   - name: auth
     description: ''
   - name: jobs
