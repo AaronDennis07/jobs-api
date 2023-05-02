@@ -37,7 +37,7 @@ app.use(xss());
 app.get('/', (req, res) => {
   res.send('jobs api');
 });
-app.use('/api-docs',swagger.serve,swagger.setup(swaggerDocs))
+app.use('/docs',swagger.serve,swagger.setup(swaggerDocs))
 app.get('/reset',async(req,res)=>{
   await User.deleteMany()
   await Job.deleteMany()

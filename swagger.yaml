@@ -1,0 +1,262 @@
+openapi: 3.0.0
+info:
+  title: jobs-api
+  contact: {}
+  version: '1.0'
+servers:
+  - url: https://jobs-api-24x4.onrender.com/api/v1/
+    variables: {}
+paths:
+  /register:
+    post:
+      tags:
+        - auth
+      summary: Register
+      operationId: Register
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/RegisterRequest'
+                - example:
+                    name: aaron
+                    email: aarondennisbv01@gmail.com
+                    password: abcd123
+            example:
+              name: aaron
+              email: aarondennisbv01@gmail.com
+              password: abcd123
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+      servers:
+        - url: https://jobs-api-24x4.onrender.com/api/v1/
+          variables: {}
+  /login:
+    post:
+      tags:
+        - auth
+      summary: login
+      operationId: login
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/loginrequest'
+                - example:
+                    email: aarondennisbv01@gmail.com
+                    password: abcd123
+            example:
+              email: aarondennisbv01@gmail.com
+              password: abcd123
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+      servers:
+        - url: https://jobs-api-24x4.onrender.com/api/v1/
+          variables: {}
+  /jobs:
+    post:
+      tags:
+        - jobs
+      summary: Create Job
+      operationId: CreateJob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/CreateJobRequest'
+                - example:
+                    company: apple
+                    position: developer
+            example:
+              company: apple
+              position: developer
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+      servers:
+        - url: https://jobs-api-24x4.onrender.com/api/v1/
+          variables: {}
+    get:
+      tags:
+        - jobs
+      summary: Get All Jobs
+      operationId: GetAllJobs
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+      servers:
+        - url: https://jobs-api-24x4.onrender.com/api/v1/
+          variables: {}
+  /jobs/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The user ID
+    get:
+      tags:
+        - jobs
+      summary: Get Job
+      operationId: GetJob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+      servers:
+        - url: https://jobs-api-24x4.onrender.com/api/v1/
+          variables: {}
+    patch:
+      tags:
+        - jobs
+      summary: Update Job
+      operationId: UpdateJob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/UpdateJobRequest'
+                - example:
+                    company: google
+                    position: developer
+            example:
+              company: google
+              position: developer
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+      servers:
+        - url: https://jobs-api-24x4.onrender.com/api/v1/
+          variables: {}
+    delete:
+      tags:
+        - jobs
+      summary: Delete Job
+      operationId: DeleteJob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+      servers:
+        - url: https://jobs-api-24x4.onrender.com/api/v1/
+          variables: {}
+components:
+  schemas:
+    RegisterRequest:
+      title: RegisterRequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: aaron
+        email: aarondennisbv01@gmail.com
+        password: abcd123
+    loginrequest:
+      title: loginrequest
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: aarondennisbv01@gmail.com
+        password: abcd123
+    CreateJobRequest:
+      title: CreateJobRequest
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: apple
+        position: developer
+    UpdateJobRequest:
+      title: UpdateJobRequest
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: google
+        position: developer
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+  - name: Misc
+    description: ''
+  - name: auth
+    description: ''
+  - name: jobs
+    description: ''
